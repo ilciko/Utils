@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+minutes=0
+seconds=0
+hours=0
+for i in $(seq 1 $1)
+do
+  let seconds=seconds+1
+  if [ $seconds -gt 59 ]
+    then
+      let minutes=minutes+1
+      Wseconds=0
+    elif [ $seconds -lt 10 ]
+      then Wseconds=$(echo 0$seconds)
+      else Wseconds=$(echo $seconds)
+    fi
+  fi
+  if [ $minutes -gt 59 ]
+    then
+      let hours=hours+1
+      Wminutes=0
+    elif [ $minutes -lt 10 ]
+      then Wminutes=$(echo 0$minutes)
+      else Wminutes=$(echo $minutes)
+    fi
+  fi
+  if [ $hours -lt 10 ]
+    then Whours=$(echo 0$hours)
+    else Whours=$(echo $hours)
+  fi
+  echo -ne "Time elapsed $Whours:$Wminutes:$Wseconds                      \r"
+  sleep 1
+done
